@@ -13,14 +13,14 @@ import kotlinx.android.synthetic.main.news_item.view.*
 
 class NewsDelegateAdapter: ViewTypeDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return TurnViewHolder(parent)
+        return NewsViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
-        holder as TurnViewHolder
+        holder as NewsViewHolder
         holder.bind(item as RedditNewsItem)
     }
-    class TurnViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
+    class NewsViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
             parent.inflate(R.layout.news_item)) {
         fun bind(item: RedditNewsItem) = with(itemView) {
             img_thumbnail.loadImg(item.thumbnail)

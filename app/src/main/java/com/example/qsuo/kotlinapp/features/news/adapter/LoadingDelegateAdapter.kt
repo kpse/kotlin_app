@@ -13,13 +13,13 @@ class LoadingDelegateAdapter : ViewTypeDelegateAdapter {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = TurnsViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = LoadingViewHolder(parent)
 
+    class LoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder (
+            parent.inflate(R.layout.news_item_loading)
+    ) {
+    }
 }
 
-class TurnsViewHolder(parent: ViewGroup): RecyclerView.ViewHolder (
-        parent.inflate(R.layout.news_item_loading)
-) {
 
-}
 
