@@ -3,7 +3,9 @@ package com.example.qsuo.kotlinapp.commons.adapter
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.example.qsuo.kotlinapp.features.news.adapter.LoadingDelegateadapter
+import com.example.qsuo.kotlinapp.commons.RedditNewsItem
+import com.example.qsuo.kotlinapp.features.news.adapter.LoadingDelegateAdapter
+import com.example.qsuo.kotlinapp.features.news.adapter.NewsDelegateAdapter
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: ArrayList<ViewType>
@@ -15,7 +17,8 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     init {
-        delegateAdapter.put(1, LoadingDelegateadapter())
+        delegateAdapter.put(1, LoadingDelegateAdapter())
+        delegateAdapter.put(2, NewsDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }
@@ -32,4 +35,15 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         return this.items.get(position).getViewType()
     }
+
+    fun addNews(news: MutableList<RedditNewsItem>) {
+        val initPosition = items.size - 1
+        items.removeAt(initPosition)
+        notifyItemRemoved(initPosition)
+
+        items.addAll(news)
+        items.add(loadingItem)
+        notifyItemChanged(initPosition, items.size + 1)
+    }
+
 }

@@ -8,7 +8,7 @@ import com.example.qsuo.kotlinapp.commons.adapter.ViewTypeDelegateAdapter
 import com.example.qsuo.kotlinapp.commons.inflate
 
 
-class LoadingDelegateadapter : ViewTypeDelegateAdapter {
+class LoadingDelegateAdapter : ViewTypeDelegateAdapter {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
 
     }

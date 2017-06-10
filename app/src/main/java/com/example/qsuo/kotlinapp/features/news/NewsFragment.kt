@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.qsuo.kotlinapp.R
+import com.example.qsuo.kotlinapp.commons.RedditNewsItem
 import com.example.qsuo.kotlinapp.commons.adapter.NewsAdapter
 import com.example.qsuo.kotlinapp.commons.adapter.ViewTypeDelegateAdapter
 import com.example.qsuo.kotlinapp.commons.inflate
@@ -31,6 +32,21 @@ class NewsFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
+
+        if (savedInstanceState == null) {
+            val news = mutableListOf<RedditNewsItem>()
+            for (i in 1..10) {
+                news.add(RedditNewsItem(
+                        "author$i",
+                        "Title $i",
+                        i,
+                        1457207701L - i * 2000,
+                        "http://lorempixel.com/200/200/technics/$i",
+                        "url"
+                ))
+            }
+            (newsList.adapter as NewsAdapter).addNews(news)
+        }
     }
 
     private fun initAdapter() {
