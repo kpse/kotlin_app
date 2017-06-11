@@ -4,6 +4,8 @@ import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.qsuo.kotlinapp.commons.RedditNewsItem
+import com.example.qsuo.kotlinapp.commons.adapter.LocalViewTypes.LOADING
+import com.example.qsuo.kotlinapp.commons.adapter.LocalViewTypes.NEWS
 import com.example.qsuo.kotlinapp.features.news.adapter.LoadingDelegateAdapter
 import com.example.qsuo.kotlinapp.features.news.adapter.NewsDelegateAdapter
 
@@ -12,13 +14,13 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val delegateAdapter = SparseArrayCompat<ViewTypeDelegateAdapter>()
 
     private val loadingItem: ViewType = object: ViewType {
-        override fun getViewType(): Int = 1
+        override fun getViewType(): Int = LocalViewTypes.LOADING
 
     }
 
     init {
-        delegateAdapter.put(1, LoadingDelegateAdapter())
-        delegateAdapter.put(2, NewsDelegateAdapter())
+        delegateAdapter.put(LOADING, LoadingDelegateAdapter())
+        delegateAdapter.put(NEWS, NewsDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }
@@ -45,5 +47,4 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         items.add(loadingItem)
         notifyItemChanged(initPosition, items.size + 1)
     }
-
 }

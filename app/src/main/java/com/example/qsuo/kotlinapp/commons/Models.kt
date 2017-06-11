@@ -1,5 +1,6 @@
 package com.example.qsuo.kotlinapp.commons
 
+import com.example.qsuo.kotlinapp.commons.adapter.LocalViewTypes.NEWS
 import com.example.qsuo.kotlinapp.commons.adapter.ViewType
 
 data class RedditNewsItem(
@@ -10,5 +11,5 @@ data class RedditNewsItem(
         val thumbnail: String,
         val url: String
 ): ViewType {
-    override fun getViewType(): Int = 2
+    override fun getViewType(): Int = NEWS
 }
