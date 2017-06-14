@@ -38,7 +38,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return this.items.get(position).getViewType()
     }
 
-    fun addNews(news: MutableList<RedditNewsItem>) {
+    fun addNews(news: List<RedditNewsItem>) {
         val initPosition = items.size - 1
         items.removeAt(initPosition)
         notifyItemRemoved(initPosition)
