@@ -2,18 +2,19 @@ package com.example.qsuo.kotlinapp.features.news
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.qsuo.kotlinapp.R
+import com.example.qsuo.kotlinapp.commons.RxBaseFragment
 import com.example.qsuo.kotlinapp.commons.adapter.NewsAdapter
 import com.example.qsuo.kotlinapp.commons.inflate
 import kotlinx.android.synthetic.main.news_fragment.*
+import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class NewsFragment: Fragment() {
+class NewsFragment: RxBaseFragment() {
 
     private val newsList by lazy {
         news_list.setHasFixedSize(true)
@@ -38,14 +39,17 @@ class NewsFragment: Fragment() {
     }
 
     private fun requestNews() {
-        newsManager.getNews()
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-            retrieveNews ->
-            (newsList.adapter as NewsAdapter).addNews(retrieveNews)
-        }, {e ->
-                    Snackbar.make(newsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
-                })
+        val subscription = newsManager.getNews()
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+              retrieveNews ->
+              (newsList.adapter as NewsAdapter).addNews(retrieveNews)
+          }, {
+              e ->
+              Snackbar.make(newsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
+          })
+        subscriptions.add(subscription)
 
     }
 

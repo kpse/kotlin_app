@@ -2,7 +2,6 @@ package com.example.qsuo.kotlinapp.features.news
 
 import com.example.qsuo.kotlinapp.commons.RedditNewsItem
 import rx.Observable
-import rx.Subscriber
 
 class NewsManager {
     fun getNews(): Observable<List<RedditNewsItem>> {
@@ -20,6 +19,7 @@ class NewsManager {
                 ))
             }
             subscriber.onNext(news)
+            subscriber.onCompleted()
         }
     }
 }
