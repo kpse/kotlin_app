@@ -4,19 +4,19 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.qsuo.kotlinapp.commons.adapter.LocalViewTypes.NEWS
 import com.example.qsuo.kotlinapp.commons.adapter.ViewType
-import com.example.qsuo.kotlinapp.commons.createParcel
 
 data class RedditNews(
   val after: String,
   val before: String,
   val news: List<RedditNewsItem>
-): Parcelable {
+) : Parcelable {
 
   companion object {
-    val CREATOR = createParcel {RedditNews(it)}
+    @JvmField
+    val CREATOR = createParcel { RedditNews(it) }
   }
 
-  protected constructor(parcelIn: Parcel): this(
+  protected constructor(parcelIn: Parcel) : this(
     parcelIn.readString(),
     parcelIn.readString(),
     mutableListOf<RedditNewsItem>().apply {
@@ -43,6 +43,7 @@ data class RedditNewsItem(
   val url: String
 ) : ViewType, Parcelable {
   companion object {
+    @JvmField
     val CREATOR = createParcel { RedditNewsItem(it) }
   }
 
