@@ -12,7 +12,7 @@ data class RedditNews(
 ) : Parcelable {
 
   companion object {
-    @JvmField
+    @JvmField @Suppress("unused")
     val CREATOR = createParcel { RedditNews(it) }
   }
 
@@ -47,7 +47,7 @@ data class RedditNewsItem(
     val CREATOR = createParcel { RedditNewsItem(it) }
   }
 
-  protected constructor(parcelIn: Parcel) : this(
+  private constructor(parcelIn: Parcel) : this(
     parcelIn.readString(),
     parcelIn.readString(),
     parcelIn.readInt(),

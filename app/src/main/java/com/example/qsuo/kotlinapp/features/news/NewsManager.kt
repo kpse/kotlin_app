@@ -1,15 +1,16 @@
 package com.example.qsuo.kotlinapp.features.news
 
-import com.example.qsuo.kotlinapp.api.RestAPI
+import com.example.qsuo.kotlinapp.api.NewsAPI
+import com.example.qsuo.kotlinapp.api.NewsRestAPI
 import com.example.qsuo.kotlinapp.commons.RedditNews
 import com.example.qsuo.kotlinapp.commons.RedditNewsItem
 import rx.Observable
 
-class NewsManager(private val api: RestAPI = RestAPI()) {
+class NewsManager(private val restApi: NewsAPI = NewsRestAPI()) {
   fun getNews(after: String, limit: String = "10"): Observable<RedditNews> {
     return Observable.create {
       subscriber ->
-      val callResponse = api.getNews(after, limit)
+      val callResponse = restApi.getNews(after, limit)
       val response = callResponse.execute()
       if (response.isSuccessful) {
         val dataResponse = response.body().data

@@ -25,7 +25,10 @@ class NewsFragment : RxBaseFragment() {
   private var redditNews: RedditNews? = null
   private val newsList by lazy {
     news_list.setHasFixedSize(true)
-    news_list.layoutManager = LinearLayoutManager(context)
+    val linearLayout = LinearLayoutManager(context)
+    news_list.layoutManager = linearLayout
+    news_list.clearOnScrollListeners()
+    news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
     news_list
   }
 
@@ -37,13 +40,6 @@ class NewsFragment : RxBaseFragment() {
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
-    newsList.apply {
-      setHasFixedSize(true)
-      val linearLayout = LinearLayoutManager(context)
-      newsList.layoutManager = linearLayout
-      newsList.clearOnScrollListeners()
-      newsList.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
-    }
 
     initAdapter()
 
