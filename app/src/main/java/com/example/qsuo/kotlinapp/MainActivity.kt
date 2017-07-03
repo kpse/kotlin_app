@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import com.example.qsuo.kotlinapp.features.news.NewsFragment
 
@@ -19,17 +20,30 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
+        setText(R.id.textView3, "updated by kotlin")
+
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            cleanUpText(R.id.textView1)
+            cleanUpText(R.id.textView2)
+            cleanUpText(R.id.textView3)
+            cleanUpText(R.id.textView4)
+            Snackbar.make(view, "Let's rock!!!", Snackbar.LENGTH_LONG)
+                    .setAction("Refresh", View.OnClickListener { changeFragment(NewsFragment()) }).show()
         }
 
-        val text3 = findViewById(R.id.textView3) as TextView
 
-        text3.text = "updated by kotlin"
 
-        changeFragment(NewsFragment())
+    }
+
+    private fun setText(id: Int, content: String) {
+        val textView = findViewById(id) as TextView
+        textView.text = content
+    }
+
+    private fun cleanUpText(id: Int) {
+        val view1 = findViewById(id) as TextView
+        view1.text = ""
     }
 
     private fun changeFragment(f: Fragment) {
