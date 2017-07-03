@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -32,6 +33,12 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Refresh", View.OnClickListener { changeFragment(NewsFragment()) }).show()
         }
 
+        val closeIcon = findViewById(R.id.cross) as FloatingActionButton
+        closeIcon.setOnClickListener { view ->
+            clearBackStack()
+            setText(R.id.textView3, "you are back.")
+        }
+
 
 
     }
@@ -52,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         ft.replace(R.id.activity_base_content, f)
         ft.addToBackStack(null)
         ft.commit()
-
     }
 
 
@@ -74,4 +80,13 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    fun clearBackStack() {
+        val manager = supportFragmentManager;
+        if (manager.backStackEntryCount > 0) {
+            val first = manager.getBackStackEntryAt(0);
+            manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
 }
