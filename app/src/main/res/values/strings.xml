@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="view3">view3Text</string>
     <string name="view4">view4</string>
+    <string name="snackBar">Let\'s rock!!!</string>
+    <string name="thumbnail">myThumbnail</string>
 </resources>

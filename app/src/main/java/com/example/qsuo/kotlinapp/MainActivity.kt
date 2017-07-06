@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        setText(R.id.textView3, "updated by kotlin")
+        setText(R.id.textView3, getString(R.string.view3))
+        setText(R.id.textView4, getString(R.string.view4))
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view ->
@@ -29,12 +30,12 @@ class MainActivity : AppCompatActivity() {
             cleanUpText(R.id.textView2)
             cleanUpText(R.id.textView3)
             cleanUpText(R.id.textView4)
-            Snackbar.make(view, "Let's rock!!!", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, getString(R.string.snackBar), Snackbar.LENGTH_LONG)
                     .setAction("Refresh", View.OnClickListener { changeFragment(NewsFragment()) }).show()
         }
 
         val closeIcon = findViewById(R.id.cross) as FloatingActionButton
-        closeIcon.setOnClickListener { view ->
+        closeIcon.setOnClickListener { _ ->
             clearBackStack()
             setText(R.id.textView3, "you are back.")
         }
